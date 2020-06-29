@@ -1,14 +1,16 @@
 package io.github.chronosx88.yggdrasil
 
+import android.app.Notification
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
-import android.net.Network
 import android.net.VpnService
 import android.os.ParcelFileDescriptor
 import android.system.OsConstants
 import android.util.Log
+import androidx.core.app.NotificationCompat
 import com.google.gson.Gson
 import dummy.ConduitEndpoint
 import io.github.chronosx88.yggdrasil.models.DNSInfo
@@ -21,7 +23,6 @@ import mobile.Mobile
 import mobile.Yggdrasil
 import java.io.*
 import java.net.Inet6Address
-import java.nio.ByteBuffer
 
 
 class YggdrasilTunService : VpnService() {
@@ -41,17 +42,28 @@ class YggdrasilTunService : VpnService() {
     private var scope: CoroutineScope? = null
     private var address: String? = null
 
+    private var mNotificationManager: NotificationManager? = null
+
+    private val FOREGROUND_ID = 1338
+
+    override fun onCreate() {
+        super.onCreate()
+        mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
-        when(intent?.getStringExtra(MainActivity.COMMAND)){
+         when(intent?.getStringExtra(MainActivity.COMMAND)){
             MainActivity.STOP ->{
                 val pi: PendingIntent? = intent.getParcelableExtra(MainActivity.PARAM_PINTENT)
                 stopVpn(pi)
+                startForeground(FOREGROUND_ID, foregroundNotification("Yggdrasil service stopped"))
             }
             MainActivity.START ->{
                 val peers = deserializeStringList2PeerInfoSet(intent.getStringArrayListExtra(MainActivity.PEERS))
                 val dns = deserializeStringList2DNSInfoSet(intent.getStringArrayListExtra(MainActivity.DNS))
                 val pi: PendingIntent = intent.getParcelableExtra(MainActivity.PARAM_PINTENT)
+                startForeground(FOREGROUND_ID, foregroundNotification("Yggdrasil service started"))
                 ygg = Yggdrasil()
                 setupTunInterface(pi, peers, dns)
             }
@@ -61,7 +73,7 @@ class YggdrasilTunService : VpnService() {
             }
         }
 
-        return super.onStartCommand(intent, flags, startId)
+        return START_NOT_STICKY
     }
 
     private fun setupIOStreams(dns: MutableSet<DNSInfo>){
@@ -192,11 +204,13 @@ class YggdrasilTunService : VpnService() {
         ygg.stop()
         val intent: Intent = Intent()
         pi!!.send(this, MainActivity.STATUS_STOP, intent)
+        stopForeground(true)
         stopSelf()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        stopForeground(true)
         stopSelf()
     }
 
@@ -214,5 +228,15 @@ class YggdrasilTunService : VpnService() {
             }
         }
         return false
+    }
+
+    private fun foregroundNotification(text: String): Notification? {
+        val b = NotificationCompat.Builder(this)
+        b.setOngoing(true)
+            .setContentTitle(getString(R.string.app_name))
+            .setContentText(text)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setTicker(text)
+        return b.build()
     }
 }
