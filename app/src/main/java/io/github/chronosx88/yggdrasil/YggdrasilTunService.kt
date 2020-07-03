@@ -37,10 +37,11 @@ class YggdrasilTunService : VpnService() {
     private var isClosed = false
 
     /** Maximum packet size is constrained by the MTU, which is given as a signed short - 256  */
-    private val MAX_PACKET_SIZE = 65535
-
     companion object {
         private const val TAG = "Yggdrasil-service"
+
+        public var MAX_PACKET_SIZE = 65535
+        public var LOG = ""
     }
     private var tunInterface: ParcelFileDescriptor? = null
     private var tunInputStream: InputStream? = null
@@ -142,7 +143,7 @@ class YggdrasilTunService : VpnService() {
         }
         scope!!.launch {
             while (!isClosed) {
-                writePacketsToTun(yggConduitEndpoint)
+                writePacketsToTun(yggConduitEndpoint, pi, dns)
             }
         }
         val intent: Intent = Intent().putExtra(MainActivity.IPv6, address)
@@ -233,13 +234,26 @@ class YggdrasilTunService : VpnService() {
         }
     }
 
-    private fun writePacketsToTun(yggConduitEndpoint: ConduitEndpoint) {
+    private fun writePacketsToTun(
+        yggConduitEndpoint: ConduitEndpoint,
+        pi: PendingIntent,
+        dns: MutableSet<DNSInfo>
+    ) {
         val buffer = yggConduitEndpoint.recv()
         if(buffer!=null) {
             try {
                 tunOutputStream?.write(buffer)
             } catch (e: IOException) {
                 e.printStackTrace()
+                if(e.message.toString().contains("ENOBUFS")){
+                    MAX_PACKET_SIZE = MAX_PACKET_SIZE-1024
+
+                    setupIOStreams(dns)
+                    val intent: Intent = Intent()
+                    pi!!.send(this, MainActivity.STATUS_MTU, intent)
+                } else {
+                    LOG = LOG+"\n"+e.message
+                }
             }
         }
     }
@@ -271,10 +285,12 @@ class YggdrasilTunService : VpnService() {
         val networks = cm.allNetworks
         for (network in networks) {
             val linkProperties = cm.getLinkProperties(network)
-            val routes = linkProperties.routes
-            for (route in routes) {
-                if (route.isDefaultRoute && route.gateway is Inet6Address) {
-                    return true
+            if(linkProperties!=null) {
+                val routes = linkProperties.routes
+                for (route in routes) {
+                    if (route.isDefaultRoute && route.gateway is Inet6Address) {
+                        return true
+                    }
                 }
             }
         }

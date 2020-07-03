@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         const val STATUS_START = 7
         const val STATUS_FINISH = 8
         const val STATUS_STOP = 9
+        const val STATUS_MTU = 100
         const val IPv6: String = "IPv6"
         const val PEERS: String = "PEERS"
         const val DNS: String = "DNS"
@@ -75,6 +76,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+        findViewById<TextView>(R.id.mtu).text="MTU:"+YggdrasilTunService.MAX_PACKET_SIZE.toString()
+
         isStarted = isYggServiceRunning(this)
         val switchOn = findViewById<Switch>(R.id.switchOn)
         switchOn.isChecked = isStarted
@@ -296,6 +299,10 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
+            }
+            STATUS_MTU -> {
+                findViewById<TextView>(R.id.mtu).text="MTU:"+YggdrasilTunService.MAX_PACKET_SIZE.toString()
+                findViewById<TextView>(R.id.log).text=YggdrasilTunService.LOG
             }
             else -> { // Note the block
 
