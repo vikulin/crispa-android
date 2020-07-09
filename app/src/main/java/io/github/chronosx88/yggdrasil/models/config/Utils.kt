@@ -78,6 +78,15 @@ class Utils {
 
         @JvmStatic
         fun ping(address: InetAddress, port:Int): Int {
+            try {
+                socket.connect(InetSocketAddress(address, port), 5000)
+                socket.close()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                print(address)
+                return Int.MAX_VALUE
+            }
+            // Workaround: Make a probe before actually measuring
             val start = System.currentTimeMillis()
             val socket = Socket()
             try {
