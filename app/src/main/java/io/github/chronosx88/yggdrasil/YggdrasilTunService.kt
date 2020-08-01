@@ -34,7 +34,7 @@ class YggdrasilTunService : VpnService() {
     private var isClosed = false
 
     /** Maximum packet size is constrained by the MTU, which is given as a signed short/2 */
-    private val MAX_PACKET_SIZE = 1500
+    private val MAX_PACKET_SIZE = Short.MAX_VALUE-1
 
     companion object {
         private const val TAG = "Yggdrasil-service"
