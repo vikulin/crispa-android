@@ -22,11 +22,6 @@ import io.github.chronosx88.yggdrasil.models.config.Utils.Companion.deserializeS
 import io.github.chronosx88.yggdrasil.models.config.Utils.Companion.deserializeStringSet2PeerInfoSet
 import io.github.chronosx88.yggdrasil.models.config.Utils.Companion.serializeDNSInfoSet2StringList
 import io.github.chronosx88.yggdrasil.models.config.Utils.Companion.serializePeerInfoSet2StringList
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.net.InetAddress
 import kotlin.concurrent.thread
 
 
