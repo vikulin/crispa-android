@@ -1,0 +1,5 @@
+-keep class go.** { *; }
+-keep class yggdrasil.** { *; }
+-keep class config.** { *; }
+-keep class mobile.** { *; }
+-keep class dummy.** { *; }
