@@ -10,6 +10,7 @@ android {
         targetSdkVersion 29
         versionCode 4
         versionName "1.4"
+        multiDexEnabled=true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         project.ext.set("archivesBaseName", project.getParent().name+"-"+versionName)
     }
