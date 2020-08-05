@@ -34,14 +34,14 @@ class YggdrasilTunService : VpnService() {
     private var isClosed = false
 
     /** Maximum packet size is constrained by the MTU, which is given as a signed short/2 */
-    private val MAX_PACKET_SIZE = Short.MAX_VALUE/2
+    private val MAX_PACKET_SIZE = Short.MAX_VALUE-1
 
     companion object {
         private const val TAG = "Yggdrasil-service"
     }
     private var tunInterface: ParcelFileDescriptor? = null
-    private var tunInputStream: InputStream? = null
-    private var tunOutputStream: OutputStream? = null
+    private lateinit var tunInputStream: InputStream
+    private lateinit var tunOutputStream: OutputStream
     private var scope: CoroutineScope? = null
     private var address: String? = null
 
@@ -139,7 +139,7 @@ class YggdrasilTunService : VpnService() {
         val job = SupervisorJob()
         scope = CoroutineScope(Dispatchers.Default + job)
         scope!!.launch {
-            val buffer = ByteArray(2048)
+            val buffer = ByteArray(1024)
             while (!isClosed) {
                 readPacketsFromTun(yggConduitEndpoint, buffer)
             }
@@ -226,8 +226,12 @@ class YggdrasilTunService : VpnService() {
     private fun readPacketsFromTun(yggConduitEndpoint: ConduitEndpoint, buffer: ByteArray) {
         try {
             // Read the outgoing packet from the input stream.
-            //val length = tunInputStream?.read(buffer) ?: 1
-            yggConduitEndpoint.send(tunInputStream?.readBytes())
+            val length = tunInputStream.read(buffer)
+            if (length > 0){
+                yggConduitEndpoint.send(buffer.sliceArray(IntRange(0, length - 1)))
+            } else {
+                Thread.sleep(5)
+            }
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -237,7 +241,7 @@ class YggdrasilTunService : VpnService() {
         val buffer = yggConduitEndpoint.recv()
         if(buffer!=null) {
             try {
-                tunOutputStream?.write(buffer)
+                tunOutputStream.write(buffer)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
