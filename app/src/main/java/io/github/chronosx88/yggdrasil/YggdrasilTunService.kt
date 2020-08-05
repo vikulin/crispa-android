@@ -34,7 +34,7 @@ class YggdrasilTunService : VpnService() {
     private var isClosed = false
 
     /** Maximum packet size is constrained by the MTU, which is given as a signed short/2 */
-    private val MAX_PACKET_SIZE = Short.MAX_VALUE-1
+    private val MAX_PACKET_SIZE = Short.MAX_VALUE/2
 
     companion object {
         private const val TAG = "Yggdrasil-service"
@@ -227,7 +227,11 @@ class YggdrasilTunService : VpnService() {
         try {
             // Read the outgoing packet from the input stream.
             val length = tunInputStream?.read(buffer) ?: 1
-            yggConduitEndpoint.send(buffer.sliceArray(IntRange(0, length - 1)))
+            if (length > 0){
+                yggConduitEndpoint.send(buffer.sliceArray(IntRange(0, length - 1)))
+            } else {
+                Thread.sleep(5)
+            }
         } catch (e: IOException) {
             e.printStackTrace()
         }
