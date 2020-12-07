@@ -120,7 +120,13 @@ class Utils {
                     if(p.endpoint == "(self)"){
                         out.add(PeerInfo(p.protocol, InetAddress.getByName("localhost"), p.port, null, true))
                     } else {
-                        var fixWlanPart = p.endpoint.substring(p.endpoint.indexOf('%'), p.endpoint.indexOf(']'))
+                        var fixWlanPart=""
+                        if(p.endpoint.indexOf(']')>0) {
+                            fixWlanPart = p.endpoint.substring(
+                                p.endpoint.indexOf('%'),
+                                p.endpoint.indexOf(']')
+                            )
+                        }
                         var fixedUrlString = p.endpoint.replace(fixWlanPart, "")
                         var url = URI(fixedUrlString)
                         out.add(

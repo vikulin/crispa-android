@@ -258,7 +258,7 @@ class MainActivity : AppCompatActivity() {
         thread(start = true) {
             while(true) {
                 Thread.sleep(5000)
-                if(isStarted && this.currentPeers.isEmpty()) {
+                if(isStarted) {
                     updatePeers()
                 }
             }
@@ -340,9 +340,7 @@ class MainActivity : AppCompatActivity() {
         when (resultCode) {
             STATUS_START -> {
                 print("service started")
-                if (this.currentPeers.isEmpty()) {
-                    checkPeers()
-                }
+                checkPeers()
             }
             STATUS_FINISH -> {
                 isStarted = true
