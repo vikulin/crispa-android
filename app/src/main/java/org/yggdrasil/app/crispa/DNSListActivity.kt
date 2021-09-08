@@ -26,16 +26,16 @@ class DNSListActivity : AppCompatActivity() {
             DNSInfo(
             InetAddress.getByName("[301:2522::53]"),
             "CZ",
-            "DNS implementation for Yggdrasil. https://github.com/Revertron/wyrd"),
+            "DNS implementation for Mesh. https://github.com/Revertron/wyrd"),
             DNSInfo(InetAddress.getByName("[301:2923::53]"),
             "SK",
-            "DNS implementation for Yggdrasil. https://github.com/Revertron/wyrd"),
+            "DNS implementation for Mesh. https://github.com/Revertron/wyrd"),
             DNSInfo(InetAddress.getByName("[300:4523::53]"),
                 "DE",
-                "DNS implementation for Yggdrasil. https://github.com/Revertron/wyrd"),
+                "DNS implementation for Mesh. https://github.com/Revertron/wyrd"),
             DNSInfo(InetAddress.getByName("[303:8b1a::53]"),
             "RU",
-            "DNS implementation for Yggdrasil. https://github.com/Revertron/wyrd")
+            "DNS implementation for Mesh. https://github.com/Revertron/wyrd")
         )
     }
 

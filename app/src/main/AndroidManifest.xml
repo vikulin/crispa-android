@@ -41,7 +41,7 @@
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <service
-                android:name="org.yggdrasil.app.crispa.YggdrasilTunService"
+                android:name="org.yggdrasil.app.crispa.MeshTunService"
                 android:stopWithTask="true"
                 android:enabled="true"
                 android:exported="true"

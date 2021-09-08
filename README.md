@@ -1,6 +1,6 @@
-# Yggdrasil for Android
+# Mesh for Android
 
-The application for connecting to Yggdrasil network on Android.
+The application for connecting to Mesh network on Android.
 
 ## Screenshots
 

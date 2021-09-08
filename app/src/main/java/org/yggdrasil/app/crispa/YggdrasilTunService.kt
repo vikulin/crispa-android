@@ -22,15 +22,15 @@ import org.yggdrasil.app.crispa.models.config.Utils.Companion.convertPeerInfoSet
 import org.yggdrasil.app.crispa.models.config.Utils.Companion.deserializeStringList2DNSInfoSet
 import org.yggdrasil.app.crispa.models.config.Utils.Companion.deserializeStringList2PeerInfoSet
 import mobile.Mobile
-import mobile.Yggdrasil
+import mobile.Mesh
 import org.acra.ACRA
 import java.io.*
 import java.net.Inet6Address
 import kotlin.concurrent.thread
 
-class YggdrasilTunService : VpnService() {
+class MeshTunService : VpnService() {
 
-    private lateinit var ygg: Yggdrasil
+    private lateinit var ygg: Mesh
     private lateinit var tunInputStream: InputStream
     private lateinit var tunOutputStream: OutputStream
     private lateinit var address: String
@@ -41,7 +41,7 @@ class YggdrasilTunService : VpnService() {
     private var tunInterface: ParcelFileDescriptor? = null
 
     companion object {
-        private const val TAG = "Yggdrasil-service"
+        private const val TAG = "Mesh-service"
         public const val IS_VPN_SERVICE_STOPPED = "VPN_STATUS"
     }
 
@@ -52,15 +52,15 @@ class YggdrasilTunService : VpnService() {
         when(intent?.getStringExtra(MainActivity.COMMAND)){
             MainActivity.STOP ->{
                 stopVpn(pi)
-                foregroundNotification(FOREGROUND_ID, "Yggdrasil service stopped")
+                foregroundNotification(FOREGROUND_ID, "Mesh service stopped")
             }
             MainActivity.START ->{
                 val peers = deserializeStringList2PeerInfoSet(intent.getStringArrayListExtra(MainActivity.CURRENT_PEERS))
                 val dns = deserializeStringList2DNSInfoSet(intent.getStringArrayListExtra(MainActivity.CURRENT_DNS))
                 val staticIP: Boolean = intent.getBooleanExtra(MainActivity.STATIC_IP, false)
-                ygg = Yggdrasil()
+                ygg = Mesh()
                 setupTunInterface(pi, peers, dns, staticIP)
-                foregroundNotification(FOREGROUND_ID, "Yggdrasil service started")
+                foregroundNotification(FOREGROUND_ID, "Mesh service started")
             }
             MainActivity.UPDATE_DNS ->{
                 val dns = deserializeStringList2DNSInfoSet(intent.getStringArrayListExtra(MainActivity.CURRENT_DNS))
@@ -267,7 +267,7 @@ class YggdrasilTunService : VpnService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             val channelId =
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    createNotificationChannel(TAG, "Yggdrasil service")
+                    createNotificationChannel(TAG, "Mesh service")
                 } else {
                     // If earlier version channel ID is not used
                     // https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#NotificationCompat.Builder(android.content.Context)

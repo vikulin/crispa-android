@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         const val CURRENT_PEERS = "CURRENT_PEERS_v1.2.1"
         const val CURRENT_DNS = "CURRENT_DNS_v1.2"
         const val START_VPN = "START_VPN"
-        private const val TAG = "Yggdrasil"
+        private const val TAG = "Mesh"
         private const val VPN_REQUEST_CODE = 0x0F
 
         @JvmStatic
@@ -223,7 +223,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun stopVpn(){
         Log.i(TAG, "Stop")
-        val intent = Intent(this, YggdrasilTunService::class.java)
+        val intent = Intent(this, MeshTunService::class.java)
         val TASK_CODE = 100
         val pi = createPendingResult(TASK_CODE, intent, 0)
         intent.putExtra(PARAM_PINTENT, pi)
@@ -243,7 +243,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateDNS(){
         Log.i(TAG, "Update DNS")
-        val intent = Intent(this, YggdrasilTunService::class.java)
+        val intent = Intent(this, MeshTunService::class.java)
         val TASK_CODE = 100
         val pi = createPendingResult(TASK_CODE, intent, 0)
         intent.putExtra(PARAM_PINTENT, pi)
@@ -254,7 +254,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updatePeers(){
         Log.d(TAG, "Update Peers")
-        val intent = Intent(this, YggdrasilTunService::class.java)
+        val intent = Intent(this, MeshTunService::class.java)
         val TASK_CODE = 100
         val pi = createPendingResult(TASK_CODE, intent, 0)
         intent.putExtra(PARAM_PINTENT, pi)
@@ -279,7 +279,7 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == VPN_REQUEST_CODE && resultCode== Activity.RESULT_OK){
 
-            val intent = Intent(this, YggdrasilTunService::class.java)
+            val intent = Intent(this, MeshTunService::class.java)
             val TASK_CODE = 100
             val pi = createPendingResult(TASK_CODE, intent, 0)
             intent.putExtra(PARAM_PINTENT, pi)
@@ -398,13 +398,13 @@ class MainActivity : AppCompatActivity() {
 
     //TODO reimplement it
     private fun isYggServiceRunning(context: Context): Boolean {
-        if(this.intent.hasExtra(YggdrasilTunService.IS_VPN_SERVICE_STOPPED)){
-            return !this.intent.getBooleanExtra(YggdrasilTunService.IS_VPN_SERVICE_STOPPED, true)
+        if(this.intent.hasExtra(MeshTunService.IS_VPN_SERVICE_STOPPED)){
+            return !this.intent.getBooleanExtra(MeshTunService.IS_VPN_SERVICE_STOPPED, true)
         }
         val manager =
             context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         for (service in manager.getRunningServices(Int.MAX_VALUE)) {
-            if (YggdrasilTunService::class.java.getName() == service.service.className) {
+            if (MeshTunService::class.java.getName() == service.service.className) {
                 return true
             }
         }
