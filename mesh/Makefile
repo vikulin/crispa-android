@@ -1,8 +1,8 @@
 GOPATH=$(shell go env GOPATH)
 export GO111MODULE=off
 all:
-	-go get -u github.com/RiV-chain/RiV-mesh-go;
-	-cd $(GOPATH)/src/github.com/RiV-chain/RiV-mesh-go; \
+	-go get -u github.com/RiV-chain/RiV-mesh;
+	-cd $(GOPATH)/src/github.com/RiV-chain/RiV-mesh; \
 		go get -v -d ./...; \
 		go get -u github.com/RiV-chain/RiV-mesh-extras; \
 		ANDROID=true ./build;
