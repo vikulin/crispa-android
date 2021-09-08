@@ -1,4 +1,4 @@
-package org.yggdrasil.app.crispa.models.config
+package org.mesh.app.crispa.models.config
 
 import android.content.Context
 import android.net.ConnectivityManager

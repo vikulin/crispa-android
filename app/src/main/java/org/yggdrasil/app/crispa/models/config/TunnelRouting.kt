@@ -1,4 +1,4 @@
-package org.yggdrasil.app.crispa.models.config
+package org.mesh.app.crispa.models.config
 
 import com.google.gson.annotations.SerializedName
 

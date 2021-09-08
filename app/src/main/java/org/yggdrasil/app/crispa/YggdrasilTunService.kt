@@ -1,4 +1,4 @@
-package org.yggdrasil.app.crispa
+package org.mesh.app.crispa
 
 import android.app.*
 import android.content.Context
@@ -14,13 +14,13 @@ import androidx.core.app.NotificationCompat
 import androidx.preference.PreferenceManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import org.yggdrasil.app.crispa.models.DNSInfo
-import org.yggdrasil.app.crispa.models.PeerInfo
-import org.yggdrasil.app.crispa.models.config.Peer
-import org.yggdrasil.app.crispa.models.config.Utils.Companion.convertPeer2PeerStringList
-import org.yggdrasil.app.crispa.models.config.Utils.Companion.convertPeerInfoSet2PeerIdSet
-import org.yggdrasil.app.crispa.models.config.Utils.Companion.deserializeStringList2DNSInfoSet
-import org.yggdrasil.app.crispa.models.config.Utils.Companion.deserializeStringList2PeerInfoSet
+import org.mesh.app.crispa.models.DNSInfo
+import org.mesh.app.crispa.models.PeerInfo
+import org.mesh.app.crispa.models.config.Peer
+import org.mesh.app.crispa.models.config.Utils.Companion.convertPeer2PeerStringList
+import org.mesh.app.crispa.models.config.Utils.Companion.convertPeerInfoSet2PeerIdSet
+import org.mesh.app.crispa.models.config.Utils.Companion.deserializeStringList2DNSInfoSet
+import org.mesh.app.crispa.models.config.Utils.Companion.deserializeStringList2PeerInfoSet
 import mobile.Mobile
 import mobile.Mesh
 import org.acra.ACRA

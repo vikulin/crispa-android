@@ -1,4 +1,4 @@
-package org.yggdrasil.app.crispa
+package org.mesh.app.crispa
 
 import org.junit.Test
 

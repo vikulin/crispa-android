@@ -1,4 +1,4 @@
 The application for connecting to Mesh network on Android
 
-Once connected, you can access yggdrasil public services,
+Once connected, you can access mesh public services,
 as the application has peered automatically to default peers within the application

@@ -1,4 +1,4 @@
-package org.yggdrasil.app.crispa
+package org.mesh.app.crispa
 
 import android.app.Activity
 import android.app.ActivityManager
@@ -14,17 +14,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.preference.PreferenceManager
 import dalvik.system.DexFile
-import org.yggdrasil.app.crispa.models.DNSInfo
-import org.yggdrasil.app.crispa.models.PeerInfo
-import org.yggdrasil.app.crispa.models.config.DNSInfoListAdapter
-import org.yggdrasil.app.crispa.models.config.PeerInfoListAdapter
-import org.yggdrasil.app.crispa.models.config.Utils.Companion.deserializePeerStringList2PeerInfoSet
-import org.yggdrasil.app.crispa.models.config.Utils.Companion.deserializeStringList2DNSInfoSet
-import org.yggdrasil.app.crispa.models.config.Utils.Companion.deserializeStringList2PeerInfoSet
-import org.yggdrasil.app.crispa.models.config.Utils.Companion.deserializeStringSet2DNSInfoSet
-import org.yggdrasil.app.crispa.models.config.Utils.Companion.deserializeStringSet2PeerInfoSet
-import org.yggdrasil.app.crispa.models.config.Utils.Companion.serializeDNSInfoSet2StringList
-import org.yggdrasil.app.crispa.models.config.Utils.Companion.serializePeerInfoSet2StringList
+import org.mesh.app.crispa.models.DNSInfo
+import org.mesh.app.crispa.models.PeerInfo
+import org.mesh.app.crispa.models.config.DNSInfoListAdapter
+import org.mesh.app.crispa.models.config.PeerInfoListAdapter
+import org.mesh.app.crispa.models.config.Utils.Companion.deserializePeerStringList2PeerInfoSet
+import org.mesh.app.crispa.models.config.Utils.Companion.deserializeStringList2DNSInfoSet
+import org.mesh.app.crispa.models.config.Utils.Companion.deserializeStringList2PeerInfoSet
+import org.mesh.app.crispa.models.config.Utils.Companion.deserializeStringSet2DNSInfoSet
+import org.mesh.app.crispa.models.config.Utils.Companion.deserializeStringSet2PeerInfoSet
+import org.mesh.app.crispa.models.config.Utils.Companion.serializeDNSInfoSet2StringList
+import org.mesh.app.crispa.models.config.Utils.Companion.serializePeerInfoSet2StringList
 import kotlin.concurrent.thread
 
 

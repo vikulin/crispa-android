@@ -1,4 +1,4 @@
-package org.yggdrasil.app.crispa
+package org.mesh.app.crispa
 
 import android.app.Activity
 import android.content.Intent
@@ -9,11 +9,11 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import org.yggdrasil.app.crispa.models.DNSInfo
-import org.yggdrasil.app.crispa.models.config.SelectDNSInfoListAdapter
-import org.yggdrasil.app.crispa.models.config.Utils.Companion.deserializeStringList2DNSInfoSet
-import org.yggdrasil.app.crispa.models.config.Utils.Companion.ping
-import org.yggdrasil.app.crispa.models.config.Utils.Companion.serializeDNSInfoSet2StringList
+import org.mesh.app.crispa.models.DNSInfo
+import org.mesh.app.crispa.models.config.SelectDNSInfoListAdapter
+import org.mesh.app.crispa.models.config.Utils.Companion.deserializeStringList2DNSInfoSet
+import org.mesh.app.crispa.models.config.Utils.Companion.ping
+import org.mesh.app.crispa.models.config.Utils.Companion.serializeDNSInfoSet2StringList
 import kotlinx.coroutines.*
 import java.net.InetAddress
 import kotlin.concurrent.thread

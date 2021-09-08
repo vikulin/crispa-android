@@ -11,9 +11,9 @@
 /build
 /captures
 .externalNativeBuild
-/yggdrasil/yggdrasil.aar
-/yggdrasil/yggdrasil-sources.jar
-/yggdrasil/build/
-/app/src/main/assets/yggdrasil-0.3.8-linux-arm64
-/app/src/main/assets/yggdrasil-0.3.8-linux-armhf
+/mesh/mesh.aar
+/mesh/mesh-sources.jar
+/mesh/build/
+/app/src/main/assets/mesh-0.3.8-linux-arm64
+/app/src/main/assets/mesh-0.3.8-linux-armhf
 /.idea/

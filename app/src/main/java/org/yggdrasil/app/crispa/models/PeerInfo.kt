@@ -1,4 +1,4 @@
-package org.yggdrasil.app.crispa.models
+package org.mesh.app.crispa.models
 
 import android.content.Context
 import com.hbb20.CCPCountry

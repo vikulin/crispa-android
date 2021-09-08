@@ -11,4 +11,4 @@ Once connected, you can access RiV-mesh public services, as the application has 
 <img src="https://user-images.githubusercontent.com/8705683/87849784-62048a80-c8fc-11ea-8eb0-908e69d7595e.png" alt="" height="500" width="">
 
 New builds and updates here:
-https://t.me/yggdrasil_android
+https://t.me/mesh_android

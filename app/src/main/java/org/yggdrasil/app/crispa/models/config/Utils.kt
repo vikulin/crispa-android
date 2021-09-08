@@ -1,8 +1,8 @@
-package org.yggdrasil.app.crispa.models.config
+package org.mesh.app.crispa.models.config
 
 import com.google.gson.Gson
-import org.yggdrasil.app.crispa.models.DNSInfo
-import org.yggdrasil.app.crispa.models.PeerInfo
+import org.mesh.app.crispa.models.DNSInfo
+import org.mesh.app.crispa.models.PeerInfo
 import org.acra.ACRA
 import java.net.InetAddress
 import java.net.InetSocketAddress

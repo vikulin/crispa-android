@@ -1,12 +1,12 @@
-package org.yggdrasil.app.crispa
+package org.mesh.app.crispa
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.yggdrasil.app.crispa.models.NodeInfo
-import org.yggdrasil.app.crispa.models.config.NodeInfoListAdapter
+import org.mesh.app.crispa.models.NodeInfo
+import org.mesh.app.crispa.models.config.NodeInfoListAdapter
 
 class CopyLocalNodeInfoActivity: AppCompatActivity() {
 

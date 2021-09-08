@@ -1,4 +1,4 @@
-package org.yggdrasil.app.crispa.models.config
+package org.mesh.app.crispa.models.config
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.PopupWindow
 import android.widget.TextView
-import org.yggdrasil.app.crispa.R
+import org.mesh.app.crispa.R
 
 
 class DropDownAdapter(

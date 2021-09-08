@@ -1,4 +1,4 @@
-package org.yggdrasil.app.crispa
+package org.mesh.app.crispa
 
 import android.os.Bundle
 import android.text.Html
@@ -14,7 +14,7 @@ class AboutActivity:AppCompatActivity() {
         @JvmStatic var about = "<body style=\"background-color:#343334;\">\n" +
                 "<p class=\"western\" align=\"center\">\n" +
                 "<font style=\"font-size: 10pt\" color=\"#ffffff\" color=\"#ffffff\">\n" +
-                "Github repo <a href=\"https://github.com/yggdrasil-network/yggdrasil-android\"><u>https://github.com/yggdrasil-network/yggdrasil-android</u></a>.\n" +
+                "Github repo <a href=\"https://github.com/mesh-network/mesh-android\"><u>https://github.com/mesh-network/mesh-android</u></a>.\n" +
                 "</font>\n" +
                 "<p class=\"western\" ><font style=\"font-size: 14pt\" color=\"#ffffff\"><b>Introduction</b></font></p>\n" +
                 "<p>\n" +
@@ -46,7 +46,7 @@ class AboutActivity:AppCompatActivity() {
                 "\n" +
                 "<font class=\"western\" style=\"font-size: 14pt\" color=\"#ffffff\"><b>Does Mesh work on my platform?</b></font>\n" +
                 "<p>\n" +
-                "<font style=\"font-size: 10pt\" color=\"#ffffff\">Quite likely! Take a look at the <a href=\"https://yggdrasil-network.github.io/platforms.html\"><u>Platforms</u></a> page - you’ll find platform-specific notes there.\n" +
+                "<font style=\"font-size: 10pt\" color=\"#ffffff\">Quite likely! Take a look at the <a href=\"https://mesh-network.github.io/platforms.html\"><u>Platforms</u></a> page - you’ll find platform-specific notes there.\n" +
                 "</font></p>\n" +
                 "\n" +
                 "<font class=\"western\" style=\"font-size: 14pt\" color=\"#ffffff\"><b>Does Mesh require IPv6?</b></font>\n" +
@@ -74,8 +74,8 @@ class AboutActivity:AppCompatActivity() {
                 "<font class=\"western\" style=\"font-size: 14pt\" color=\"#ffffff\"><b>I’ve just installed Mesh and I can’t ping anyone. What have I missed?</b></font>\n" +
                 "<p>\n" +
                 "<font style=\"font-size: 10pt\" color=\"#ffffff\">Mesh requires that you configure either a static peer to another Mesh node, or that you discover another Mesh node on the same subnet using multicast discovery (which is enabled by default). If you have not added or discovered any peers, you will not be able to reach beyond your own node.\n" +
-                "You can check if you have any peers by running yggdrasilctl getPeers - peer on port 0 is your own node, ports 1 and above are your active peers.\n" +
-                "Stuck for peers? Try adding a <a href=\"https://github.com/yggdrasil-network/public-peers\"><u>public peer</u></a>.\n" +
+                "You can check if you have any peers by running meshctl getPeers - peer on port 0 is your own node, ports 1 and above are your active peers.\n" +
+                "Stuck for peers? Try adding a <a href=\"https://github.com/mesh-network/public-peers\"><u>public peer</u></a>.\n" +
                 "</font></p>\n" +
                 "\n" +
                 "<font class=\"western\" style=\"font-size: 14pt\" color=\"#ffffff\"><b>I’ve installed the Mesh Debian package and now I can’t find the logs.</b></font>\n" +
@@ -83,11 +83,11 @@ class AboutActivity:AppCompatActivity() {
                 "<font style=\"font-size: 10pt\" color=\"#ffffff\">The Debian package installs the Mesh service into systemd, therefore you can query systemd for the logs:\n" +
                 "<p>\n" +
                 "<font style=\"font-size: 10pt\" color=\"#ffffff\">\n" +
-                "    systemctl status yggdrasil\n" +
+                "    systemctl status mesh\n" +
                 "</font>\n" +
                 "<p>\n" +
                 "<font style=\"font-size: 10pt\" color=\"#ffffff\">\n" +
-                "    journalctl -u yggdrasil\n" +
+                "    journalctl -u mesh\n" +
                 "</font<\n" +
                 "</font></p>\n" +
                 "\n" +
@@ -128,12 +128,12 @@ class AboutActivity:AppCompatActivity() {
                 "</font>\n" +
                 "</font></p>\n" +
                 "\n" +
-                "<font class=\"western\" style=\"font-size: 14pt\" color=\"#ffffff\"><b>I’ve changed my AdminListen port and now yggdrasilctl doesn’t work.</b></font>\n" +
+                "<font class=\"western\" style=\"font-size: 14pt\" color=\"#ffffff\"><b>I’ve changed my AdminListen port and now meshctl doesn’t work.</b></font>\n" +
                 "<p>\n" +
-                "<font style=\"font-size: 10pt\" color=\"#ffffff\">yggdrasilctl will assume that your admin port is on localhost:9001. If you have changed it, simply pass your configured endpoint through to yggdrasilctl, i.e.\n" +
+                "<font style=\"font-size: 10pt\" color=\"#ffffff\">meshctl will assume that your admin port is on localhost:9001. If you have changed it, simply pass your configured endpoint through to meshctl, i.e.\n" +
                 "<p>\n" +
                 "<font style=\"font-size: 10pt\" color=\"#ffffff\">\n" +
-                "yggdrasilctl -endpoint=127.0.0.1:12345\n" +
+                "meshctl -endpoint=127.0.0.1:12345\n" +
                 "</font>\n" +
                 "</font></p>\n" +
                 "\n" +
@@ -149,7 +149,7 @@ class AboutActivity:AppCompatActivity() {
                 "\n" +
                 "<font class=\"western\" style=\"font-size: 14pt\" color=\"#ffffff\"><b>Does Mesh work with networks like Tor or I2P?</b></font>\n" +
                 "<p>\n" +
-                "<font style=\"font-size: 10pt\" color=\"#ffffff\">Mesh can peer over Tor or I2P. See <a href=\"https://github.com/yggdrasil-network/public-peers/tree/master/other\"><u>/public-peers/tree/master/other</u></a> for public peers.\n" +
+                "<font style=\"font-size: 10pt\" color=\"#ffffff\">Mesh can peer over Tor or I2P. See <a href=\"https://github.com/mesh-network/public-peers/tree/master/other\"><u>/public-peers/tree/master/other</u></a> for public peers.\n" +
                 "</font></p>\n" +
                 "\n" +
                 "<font class=\"western\" style=\"font-size: 14pt\" color=\"#ffffff\"><b>I want to allow outgoing connections from my machine but prevent unwanted incoming connections.</b></font>\n" +

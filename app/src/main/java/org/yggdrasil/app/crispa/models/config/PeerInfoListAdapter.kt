@@ -1,4 +1,4 @@
-package org.yggdrasil.app.crispa.models.config
+package org.mesh.app.crispa.models.config
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import org.yggdrasil.app.crispa.R
-import org.yggdrasil.app.crispa.models.PeerInfo
+import org.mesh.app.crispa.R
+import org.mesh.app.crispa.models.PeerInfo
 
 
 class PeerInfoListAdapter(

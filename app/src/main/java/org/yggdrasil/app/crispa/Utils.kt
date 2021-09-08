@@ -1,9 +1,9 @@
-package org.yggdrasil.app.crispa
+package org.mesh.app.crispa
 
 import android.content.Context
 import com.google.gson.Gson
 import config.NodeConfig
-import org.yggdrasil.app.crispa.models.config.Config
+import org.mesh.app.crispa.models.config.Config
 import java.io.File
 
 val gson = Gson()
@@ -22,6 +22,6 @@ fun createNativeYggConfig(config: Config): NodeConfig {
 
 fun Context.saveYggConfig(config: Config) {
     val configJson = gson.toJson(config)
-    val configFile = File(filesDir, "yggdrasil.conf")
+    val configFile = File(filesDir, "mesh.conf")
     configFile.writeText(configJson)
 }
