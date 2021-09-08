@@ -30,7 +30,7 @@ import kotlin.concurrent.thread
 
 class MeshTunService : VpnService() {
 
-    private lateinit var ygg: Mesh
+    private lateinit var mesh: Mesh
     private lateinit var tunInputStream: InputStream
     private lateinit var tunOutputStream: OutputStream
     private lateinit var address: String
@@ -58,7 +58,7 @@ class MeshTunService : VpnService() {
                 val peers = deserializeStringList2PeerInfoSet(intent.getStringArrayListExtra(MainActivity.CURRENT_PEERS))
                 val dns = deserializeStringList2DNSInfoSet(intent.getStringArrayListExtra(MainActivity.CURRENT_DNS))
                 val staticIP: Boolean = intent.getBooleanExtra(MainActivity.STATIC_IP, false)
-                ygg = Mesh()
+                mesh = Mesh()
                 setupTunInterface(pi, peers, dns, staticIP)
                 foregroundNotification(FOREGROUND_ID, "Mesh service started")
             }
@@ -75,7 +75,7 @@ class MeshTunService : VpnService() {
     }
 
     private fun setupIOStreams(dns: MutableSet<DNSInfo>){
-        address = ygg.addressString
+        address = mesh.addressString
 
         var builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Builder()
@@ -119,7 +119,7 @@ class MeshTunService : VpnService() {
 
         configJson = gson.toJson(config).toByteArray()
 
-        ygg.startJSON(configJson)
+        mesh.startJSON(configJson)
 
         setupIOStreams(dns)
 
@@ -140,9 +140,9 @@ class MeshTunService : VpnService() {
 
     private fun sendMeshPeerStatus(pi: PendingIntent?){
         class Token : TypeToken<List<Peer>>()
-        ygg.addressString
-        ACRA.errorReporter.putCustomData("Peers JSON", ygg.peersJSON)
-        var meshPeers: List<Peer> = gson.fromJson(ygg.peersJSON, Token().type)
+        mesh.addressString
+        ACRA.errorReporter.putCustomData("Peers JSON", mesh.peersJSON)
+        var meshPeers: List<Peer> = gson.fromJson(mesh.peersJSON, Token().type)
         val intent: Intent = Intent().putStringArrayListExtra(
             MainActivity.MESH_PEERS,
             convertPeer2PeerStringList(meshPeers)
@@ -202,7 +202,7 @@ class MeshTunService : VpnService() {
         try {
             // Read the outgoing packet from the input stream.
             val length = tunInputStream.read(buffer)
-            ygg.send(buffer.sliceArray(IntRange(0, length - 1)))
+            mesh.send(buffer.sliceArray(IntRange(0, length - 1)))
         } catch (e: IOException) {
             e.printStackTrace()
         } catch (e: Exception){
@@ -211,7 +211,7 @@ class MeshTunService : VpnService() {
     }
 
     private fun writePacketsToTun() {
-        val buffer = ygg.recv()
+        val buffer = mesh.recv()
         if(buffer!=null) {
             try {
                 tunOutputStream.write(buffer)
@@ -229,7 +229,7 @@ class MeshTunService : VpnService() {
         tunOutputStream.close()
         tunInterface!!.close()
         Log.d(TAG,"Stop is running from service")
-        ygg.stop()
+        mesh.stop()
         val intent: Intent = Intent()
         pi!!.send(this, MainActivity.STATUS_STOP, intent)
         stopForeground(true)

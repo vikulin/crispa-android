@@ -8,7 +8,7 @@ import org.acra.data.StringFormat
 import org.acra.ktx.initAcra
 import org.acra.sender.HttpSender
 
-class YggApplication : Application() {
+class MeshApplication : Application() {
 
     companion object {
         const val ACRA_BACKEND_URL = "http://acrarium.rivchain.org/acrarium-1.4.6/report"
