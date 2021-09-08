@@ -283,7 +283,7 @@ class MeshTunService : VpnService() {
                 .setContentIntent(pi)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(text)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.riv_launcher)
                 .setTicker(text)
             startForeground(FOREGROUND_ID, b.build())
         }
