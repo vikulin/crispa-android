@@ -8,8 +8,8 @@ android {
         minSdkVersion 15
         targetSdkVersion 29
 
-        versionCode 37
-        versionName "0.2.0.17"
+        versionCode 38
+        versionName "0.2.0.18"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", project.getParent().name+"-"+versionName)
     }
