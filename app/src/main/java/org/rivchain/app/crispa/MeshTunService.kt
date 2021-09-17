@@ -57,7 +57,6 @@ class MeshTunService : VpnService() {
             MainActivity.STOP ->{
                 stopVpn(pi)
                 foregroundNotification(FOREGROUND_ID, "Mesh service stopped")
-                setWiFiMulticastLock(false);
             }
             MainActivity.START ->{
                 val peers = deserializeStringList2PeerInfoSet(intent.getStringArrayListExtra(MainActivity.CURRENT_PEERS))
@@ -66,7 +65,6 @@ class MeshTunService : VpnService() {
                 mesh = Mesh()
                 setupTunInterface(pi, peers, dns, staticIP)
                 foregroundNotification(FOREGROUND_ID, "Mesh service started")
-                setWiFiMulticastLock(true);
             }
             MainActivity.UPDATE_DNS ->{
                 val dns = deserializeStringList2DNSInfoSet(intent.getStringArrayListExtra(MainActivity.CURRENT_DNS))
@@ -306,28 +304,5 @@ class MeshTunService : VpnService() {
         return channelId
     }
 
-    var wifiManager = getSystemService(WIFI_SERVICE) as WifiManager
 
-    lateinit var multicastLock: WifiManager.MulticastLock
-
-    protected fun setWiFiMulticastLock(enable: Boolean) {
-        if (multicastLock == null) {
-            multicastLock = wifiManager.createMulticastLock(javaClass.simpleName)
-        }
-        if (enable) {
-            if (multicastLock.isHeld()) {
-                //log.warning("WiFi multicast lock already acquired")
-            } else {
-                //log.info("WiFi multicast lock acquired")
-                multicastLock.acquire()
-            }
-        } else {
-            if (multicastLock.isHeld()) {
-                //log.info("WiFi multicast lock released")
-                multicastLock.release()
-            } else {
-                //log.warning("WiFi multicast lock already released")
-            }
-        }
-    }
 }

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.ActivityManager
 import android.content.*
 import android.net.VpnService
+import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -63,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         @JvmStatic
         var address: String? = ""
 
+        lateinit var wifiManager: WifiManager
     }
 
     private var currentPeers = setOf<PeerInfo>()
@@ -74,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
         isStarted = isYggServiceRunning(this)
+        wifiManager = getApplicationContext().getSystemService(WIFI_SERVICE) as WifiManager
         val switchOn = findViewById<SwitchCompat>(R.id.switchOn)
         switchOn.isChecked = isStarted
 
@@ -88,6 +91,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 stopVpn()
             }
+            setWiFiMulticastLock(isChecked)
         }
         //save to shared preferences
         val preferences =
@@ -423,6 +427,30 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         if (networkStateReceiver != null){
             unregisterReceiver(networkStateReceiver);
+        }
+    }
+
+
+
+
+
+    protected fun setWiFiMulticastLock(enable: Boolean) {
+        var multicastLock = wifiManager.createMulticastLock(javaClass.simpleName)
+
+        if (enable) {
+            if (multicastLock.isHeld()) {
+                //log.warning("WiFi multicast lock already acquired")
+            } else {
+                //log.info("WiFi multicast lock acquired")
+                multicastLock.acquire()
+            }
+        } else {
+            if (multicastLock.isHeld()) {
+                //log.info("WiFi multicast lock released")
+                multicastLock.release()
+            } else {
+                //log.warning("WiFi multicast lock already released")
+            }
         }
     }
 
