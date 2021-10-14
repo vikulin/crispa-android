@@ -4,9 +4,10 @@
         package="org.mesh.app.crispa">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
             android:name="org.mesh.app.crispa.MeshApplication"
@@ -55,7 +56,8 @@
         <activity android:name="org.mesh.app.crispa.MainActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait">
+                android:screenOrientation="portrait"
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
