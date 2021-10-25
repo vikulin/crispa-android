@@ -23,19 +23,12 @@ class DNSListActivity : AppCompatActivity() {
 
     companion object {
         val allDNS = arrayListOf(
-            DNSInfo(
-            InetAddress.getByName("[301:2522::53]"),
-            "CZ",
-            "DNS implementation for Yggdrasil. https://github.com/Revertron/wyrd"),
-            DNSInfo(InetAddress.getByName("[301:2923::53]"),
-            "SK",
-            "DNS implementation for Yggdrasil. https://github.com/Revertron/wyrd"),
-            DNSInfo(InetAddress.getByName("[300:4523::53]"),
-                "DE",
-                "DNS implementation for Yggdrasil. https://github.com/Revertron/wyrd"),
-            DNSInfo(InetAddress.getByName("[303:8b1a::53]"),
-            "RU",
-            "DNS implementation for Yggdrasil. https://github.com/Revertron/wyrd")
+            DNSInfo(InetAddress.getByName("[302:db60::53]"), "CZ", "ALFIS + AdGuard by Revertron"),
+            DNSInfo(InetAddress.getByName("[300:6223::53]"), "SK", "ALFIS + AdGuard by Revertron"),
+            DNSInfo(InetAddress.getByName("[302:7991::53]"), "RU", "ALFIS + AdGuard by Revertron"),
+            DNSInfo(InetAddress.getByName("[300:170::53]"), "NL", "ALFIS by Strannik-j"),
+            DNSInfo(InetAddress.getByName("[325:5a4:d1c9:db96::53]"), "RU", "ALFIS + EmerDNS by cofob"),
+            DNSInfo(InetAddress.getByName("[324:71e:281a:9ed3::53]"), "CA", "ALFIS + EmerDNS by acetone")
         )
     }
 
